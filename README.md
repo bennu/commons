@@ -6,7 +6,7 @@ Para usar esta librería en los proyectos de Maven debes incluir el siguiente bl
 <dependency>
     <groupId>cl.bennu</groupId>
     <artifactId>commons</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
 </dependency>
 ```
 
@@ -18,6 +18,6 @@ Para usar esta librería en los proyectos de Maven debes incluir el siguiente bl
 - commons-lang3 3.17.0
 - commons-io 2.18.0
 - java-jwt 4.4.0
-- commons-beanutils 1.9.4
+- commons-beanutils 1.10.0
 - commons-collections4 4.5.0-M3
 - slf4j-api 2.0.16
