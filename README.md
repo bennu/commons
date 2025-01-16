@@ -2,11 +2,12 @@
 
 Para usar esta librería en los proyectos de Maven debes incluir el siguiente bloque:
 
-<dependency>
+```<dependency>
     <groupId>cl.bennu</groupId>
     <artifactId>commons</artifactId>
     <version>0.0.1</version>
 </dependency>
+```
 
 ### Esta librería cuenta con las siguientes dependencias:
 
