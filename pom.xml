@@ -7,7 +7,7 @@
 
     <groupId>cl.bennu</groupId>
     <artifactId>commons</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <name>bennu-commons</name>
     <description>Utilitarios bennu</description>
     <url>https://github.com/bennu/commons</url>
