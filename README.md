@@ -48,4 +48,9 @@ Dependencies
 - java-jwt 4.5.0
 - commons-beanutils 1.10.1
 - commons-collections4 4.5.0-M3
-- slf4j-api 2.0.16
+- slf4j-api 2.0.17
+
+Test Dependencies
+------------
+
+- junit-jupiter 5.10.0
