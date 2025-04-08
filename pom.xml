@@ -7,7 +7,7 @@
 
     <groupId>cl.bennu</groupId>
     <artifactId>commons</artifactId>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
     <name>bennu-commons</name>
     <description>Utilitarios bennu</description>
     <url>https://github.com/bennu/commons</url>
@@ -48,17 +48,17 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.36</version>
+            <version>1.18.38</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>2.18.2</version>
+            <version>2.18.3</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
-            <version>2.18.2</version>
+            <version>2.18.3</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -73,12 +73,12 @@
         <dependency>
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
-            <version>4.4.0</version>
+            <version>4.5.0</version>
         </dependency>
         <dependency>
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>
-            <version>1.10.0</version>
+            <version>1.10.1</version>
             <exclusions>
                 <exclusion>
                     <groupId>commons-collections</groupId>
@@ -94,7 +94,14 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>2.0.16</version>
+            <version>2.0.17</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.10.0</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

@@ -20,7 +20,7 @@ You can pull it from the central Maven repositories:
 <dependency>
     <groupId>cl.bennu</groupId>
     <artifactId>commons</artifactId>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
 </dependency>
 ```
 
@@ -40,12 +40,17 @@ This code is licensed under the [MIT License](https://opensource.org/license/mit
 Dependencies
 ------------
 
-- lombok 1.18.36
-- jackson-core 2.18.2
-- jackson-annotations 2.18.2
+- lombok 1.18.38
+- jackson-core 2.18.3
+- jackson-annotations 2.18.3
 - commons-lang3 3.17.0
 - commons-io 2.18.0
-- java-jwt 4.4.0
-- commons-beanutils 1.10.0
+- java-jwt 4.5.0
+- commons-beanutils 1.10.1
 - commons-collections4 4.5.0-M3
-- slf4j-api 2.0.16
+- slf4j-api 2.0.17
+
+Test Dependencies
+------------
+
+- junit-jupiter 5.10.0
