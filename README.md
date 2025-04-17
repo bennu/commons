@@ -20,7 +20,7 @@ You can pull it from the central Maven repositories:
 <dependency>
     <groupId>cl.bennu</groupId>
     <artifactId>commons</artifactId>
-    <version>1.2.0</version>
+    <version>1.3.0</version>
 </dependency>
 ```
 
@@ -53,4 +53,4 @@ Dependencies
 Test Dependencies
 ------------
 
-- junit-jupiter 5.10.0
+- junit-jupiter 5.11.4
