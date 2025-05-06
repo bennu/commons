@@ -3,6 +3,7 @@ Bennu Commons
 
 [![Maven Central](https://img.shields.io/maven-central/v/cl.bennu/commons?label=Maven%20Central&logo=sonatype)](https://search.maven.org/artifact/cl.bennu/commons)
 [![License](https://img.shields.io/github/license/bennu/commons?label=License&logo=opensourceinitiative)](https://opensource.org/license/mit-0)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
 [![Supported JVM Versions](https://img.shields.io/badge/JVM-17--21-brightgreen.svg?label=JVM&logo=openjdk)](https://adoptium.net/es/temurin/releases/)
 
 Bennu Commons, a package of Java utility  classes for
@@ -20,7 +21,7 @@ You can pull it from the central Maven repositories:
 <dependency>
     <groupId>cl.bennu</groupId>
     <artifactId>commons</artifactId>
-    <version>1.3.0</version>
+    <version>1.4.0</version>
 </dependency>
 ```
 
