@@ -1,5 +1,6 @@
 package cl.bennu.commons.utils;
 
+import cl.bennu.commons.enums.NumericBaseEnum;
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.DecimalFormat;
@@ -7,7 +8,7 @@ import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.util.Currency;
 
-public class NumberUtils extends org.apache.commons.lang3.math.NumberUtils{
+public class NumberUtils extends org.apache.commons.lang3.math.NumberUtils {
 
     public static boolean isNullOrZero(Number number) {
         if (number == null) return true;
@@ -81,4 +82,49 @@ public class NumberUtils extends org.apache.commons.lang3.math.NumberUtils{
 
         return str;
     }
+
+    public static String convert(long number, NumericBaseEnum numericBaseEnum) {
+        if (numericBaseEnum == null) {
+            throw new IllegalArgumentException("NumericBaseEnum cannot be null");
+        }
+
+        if (numericBaseEnum.getSpecificNumberSystem() == null) {
+            return Long.toString(number, numericBaseEnum.getBase()).toUpperCase();
+        } else {
+            return numericBaseEnum.getSpecificNumberSystem().convert(number);
+        }
+    }
+
+    public static String convert(Integer number, NumericBaseEnum numericBaseEnum) {
+        if (number == null) {
+            throw new IllegalArgumentException("Number cannot be null");
+        }
+
+        return convert(number.longValue(), numericBaseEnum);
+    }
+
+    public static String convert(Long number, NumericBaseEnum numericBaseEnum) {
+        if (number == null) {
+            throw new IllegalArgumentException("Number cannot be null");
+        }
+
+        return convert(number.longValue(), numericBaseEnum);
+    }
+
+    public static long convert(String value, NumericBaseEnum numericBaseEnum) {
+        if (numericBaseEnum == null) {
+            throw new IllegalArgumentException("NumericBaseEnum cannot be null");
+        }
+        if (value == null) {
+            throw new IllegalArgumentException("Value cannot be null");
+        }
+
+        if (numericBaseEnum.getSpecificNumberSystem() == null) {
+            return Long.parseLong(value, numericBaseEnum.getBase());
+        } else {
+            return numericBaseEnum.getSpecificNumberSystem().convert(value);
+        }
+
+    }
+
 }
