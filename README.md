@@ -21,7 +21,7 @@ You can pull it from the central Maven repositories:
 <dependency>
     <groupId>cl.bennu</groupId>
     <artifactId>commons</artifactId>
-    <version>1.5.0</version>
+    <version>1.5.1</version>
 </dependency>
 ```
 
@@ -47,7 +47,7 @@ Dependencies
 - commons-lang3 3.17.0
 - commons-io 2.19.0
 - java-jwt 4.5.0
-- commons-beanutils 1.10.1
+- commons-beanutils 1.11.0
 - commons-collections4 4.5.0
 - slf4j-api 2.0.17
 
