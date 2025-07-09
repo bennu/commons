@@ -1,7 +1,6 @@
-package cl.bennu.commons.validator;
+package cl.bennu.commons.utils;
 
 import cl.bennu.commons.enums.NumericBaseEnum;
-import cl.bennu.commons.utils.NumberUtils;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

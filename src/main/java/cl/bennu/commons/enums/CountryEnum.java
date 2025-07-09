@@ -8,6 +8,9 @@ import lombok.Getter;
 import java.util.Arrays;
 import java.util.Map;
 
+/**
+ * Represents a country with its associated details.
+ */
 @Getter
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum CountryEnum implements BaseEnum {
@@ -210,6 +213,15 @@ public enum CountryEnum implements BaseEnum {
     ;
     //@formatter:on
 
+    /**
+     * Constructor for CountryEnum.
+     *
+     * @param id the unique identifier of the country
+     * @param code the ISO code of the country
+     * @param name the name of the country
+     * @param independenceYear the year of independence
+     * @param currencyEnum the associated currency
+     */
     CountryEnum(Integer id, String code, String name, Integer independenceYear, CurrencyEnum currencyEnum) {
         this.id = id;
         this.code = code;
