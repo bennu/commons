@@ -7,7 +7,7 @@
 
     <groupId>cl.bennu</groupId>
     <artifactId>commons</artifactId>
-    <version>1.6.1</version>
+    <version>1.6.2</version>
     <name>bennu-commons</name>
     <description>Utilitarios bennu</description>
     <url>https://github.com/bennu/commons</url>
@@ -53,22 +53,22 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>2.19.1</version>
+            <version>2.19.2</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
-            <version>2.19.0</version>
+            <version>2.19.2</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.17.0</version>
+            <version>3.18.0</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.19.0</version>
+            <version>2.20.0</version>
         </dependency>
         <dependency>
             <groupId>com.auth0</groupId>
