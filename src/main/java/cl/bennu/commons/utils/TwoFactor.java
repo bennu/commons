@@ -8,11 +8,6 @@ import java.time.format.DateTimeFormatter;
 public class TwoFactor {
 
     public static String generateMinutelyPassword() {
-        String dateMinuteStr = LocalDateTime.now(ZoneId.of("America/Santiago")).format(DateTimeFormatter.ofPattern("yyyyMMddHHmm"));
-        long value = Long.parseLong(dateMinuteStr);
-
-        long mixed = (value * 97 + 31) % 10000;
-
         return generateMinutelyPassword(null);
     }
 
