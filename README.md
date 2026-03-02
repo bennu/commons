@@ -21,7 +21,7 @@ You can pull it from the central Maven repositories:
 <dependency>
     <groupId>cl.bennu</groupId>
     <artifactId>commons</artifactId>
-    <version>1.6.3</version>
+    <version>1.6.4</version>
 </dependency>
 ```
 
@@ -42,11 +42,11 @@ Dependencies
 ------------
 
 - lombok 1.18.48
-- jackson-core 2.19.4
-- jackson-annotations 2.19.4
+- jackson-core 2.21.1
+- jackson-annotations 2.21
 - commons-lang3 3.20.0
 - commons-io 2.21.0
-- java-jwt 4.5.0
+- java-jwt 4.5.1
 - commons-beanutils 1.11.0
 - commons-collections4 4.5.0
 - slf4j-api 2.0.17
