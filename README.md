@@ -21,7 +21,7 @@ You can pull it from the central Maven repositories:
 <dependency>
     <groupId>cl.bennu</groupId>
     <artifactId>commons</artifactId>
-    <version>1.6.4</version>
+    <version>1.7.0</version>
 </dependency>
 ```
 
@@ -41,9 +41,10 @@ This code is licensed under the [MIT License](https://opensource.org/license/mit
 Dependencies
 ------------
 
-- lombok 1.18.48
-- jackson-core 2.21.1
+- lombok 1.18.44
+- jackson-core 3.1.0
 - jackson-annotations 2.21
+- jackson-databind 3.1.0
 - commons-lang3 3.20.0
 - commons-io 2.21.0
 - java-jwt 4.5.1
@@ -54,4 +55,4 @@ Dependencies
 Test Dependencies
 ------------
 
-- junit-jupiter 5.14.1
+- junit-jupiter 6.0.3
