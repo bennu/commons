@@ -1,7 +1,14 @@
 package cl.bennu.commons.utils;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.interfaces.DecodedJWT;
+
+import io.jsonwebtoken.Jwts;
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.json.JsonMapper;
+
+import java.util.Base64;
+import java.util.List;
+import java.util.Map;
 
 public abstract class TokenUtil {
 
@@ -16,8 +23,21 @@ public abstract class TokenUtil {
                 token = token.split(BEARER)[1];
             }
 
-            DecodedJWT decodedJWT = JWT.decode(token.trim());
-            user = decodedJWT.getClaim(CLAIM_USER).asString();
+            String[] jwtBody = token.split("\\.");
+            if (jwtBody.length != 3) {
+                throw new IllegalArgumentException("Invalid JWT token format");
+            }
+            byte[] bytes = Base64.getUrlDecoder().decode(jwtBody[1]);
+
+            ObjectMapper mapper = new JsonMapper();
+            String json = new String(bytes);
+            Map<String, Object> claims = mapper.readValue(json, new TypeReference<Map<String, Object>>() {});
+            Object rolesClaim = claims.get(CLAIM_USER);
+            if (rolesClaim != null) {
+                user = rolesClaim.toString();
+            } else {
+                user = "anonymous";
+            }
             user = user.split("@")[0];
         } catch (Exception e) {
             user = "anonymous";
@@ -31,9 +51,21 @@ public abstract class TokenUtil {
             if (token.contains(BEARER)) {
                 token = token.split(BEARER)[1];
             }
+            String[] jwtBody = token.split("\\.");
+            if (jwtBody.length != 3) {
+                throw new IllegalArgumentException("Invalid JWT token format");
+            }
+            byte[] bytes = Base64.getUrlDecoder().decode(jwtBody[1]);
 
-            DecodedJWT decodedJWT = JWT.decode(token.trim());
-            profiles = decodedJWT.getClaim(CLAIM_ROLES).asArray(String.class);
+            ObjectMapper mapper = new JsonMapper();
+            String json = new String(bytes);
+            Map<String, Object> claims = mapper.readValue(json, new TypeReference<Map<String, Object>>() {});
+            Object rolesClaim = claims.get(CLAIM_ROLES);
+            if (rolesClaim != null) {
+                profiles = ((List<String>) rolesClaim).toArray(String[]::new);
+            } else {
+                profiles = null;
+            }
         } catch (Exception e) {
             profiles = null;
         }
