@@ -1,8 +1,11 @@
 package cl.bennu.commons.utils;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
 import org.junit.jupiter.api.Test;
+
+import java.security.*;
+import java.util.Base64;
+import java.util.Map;
+import java.util.WeakHashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -10,9 +13,7 @@ public class TokenUtilsTest {
 
     @Test
     void testGetUserValidToken() {
-        String token = JWT.create()
-                .withClaim("preferred_username", "testuser@example.com")
-                .sign(Algorithm.HMAC256("secret"));
+        String token = createTestToken("testuser@example.com", null);
         assertEquals("testuser", TokenUtil.getUser(token));
     }
 
@@ -24,25 +25,19 @@ public class TokenUtilsTest {
 
     @Test
     void testGetUserTokenWithoutBearer() {
-        String token = JWT.create()
-                .withClaim("preferred_username", "testuser@example.com")
-                .sign(Algorithm.HMAC256("secret"));
+        String token = createTestToken("testuser@example.com", null);
         assertEquals("testuser", TokenUtil.getUser(token));
     }
 
     @Test
     void testGetUserTokenWithBearer() {
-        String token = "Bearer " + JWT.create()
-                .withClaim("preferred_username", "testuser@example.com")
-                .sign(Algorithm.HMAC256("secret"));
+        String token = createTestToken("testuser@example.com", null);
         assertEquals("testuser", TokenUtil.getUser(token));
     }
 
     @Test
     void testGetRolesValidToken() {
-        String token = JWT.create()
-                .withArrayClaim("roles", new String[]{"ADMIN", "USER"})
-                .sign(Algorithm.HMAC256("secret"));
+        String token = createTestToken("testuser", new String[]{"ADMIN", "USER"});
         String[] roles = TokenUtil.getRoles(token);
         assertNotNull(roles);
         assertArrayEquals(new String[]{"ADMIN", "USER"}, roles);
@@ -56,9 +51,7 @@ public class TokenUtilsTest {
 
     @Test
     void testGetRolesTokenWithoutBearer() {
-        String token = JWT.create()
-                .withArrayClaim("roles", new String[]{"ADMIN", "USER"})
-                .sign(Algorithm.HMAC256("secret"));
+        String token = createTestToken("anounymus", new String[]{"ADMIN", "USER"});
         String[] roles = TokenUtil.getRoles(token);
         assertNotNull(roles);
         assertArrayEquals(new String[]{"ADMIN", "USER"}, roles);
@@ -66,9 +59,7 @@ public class TokenUtilsTest {
 
     @Test
     void testGetRolesTokenWithBearer() {
-        String token = "Bearer " + JWT.create()
-                .withArrayClaim("roles", new String[]{"ADMIN", "USER"})
-                .sign(Algorithm.HMAC256("secret"));
+        String token = createTestToken("testuser", new String[]{"ADMIN", "USER"});
         String[] roles = TokenUtil.getRoles(token);
         assertNotNull(roles);
         assertArrayEquals(new String[]{"ADMIN", "USER"}, roles);
@@ -76,8 +67,45 @@ public class TokenUtilsTest {
 
     @Test
     void testGetRolesTokenWithMissingClaims() {
-        String token = JWT.create().sign(Algorithm.HMAC256("secret"));
+        String token = createTestToken(null, null);
         assertNull(TokenUtil.getRoles(token));
     }
 
+    private String createTestToken(String user, String[] roles) {
+        Map<String, Object> header = Map.of("alg", "HS256", "typ", "JWT");
+        Map<String, Object> claims = new WeakHashMap<>();
+        if (roles != null) {
+            claims.put("roles", roles);
+        }
+        if (user != null) {
+            claims.put("preferred_username", user);
+        }
+        String stringHeader = JsonUtils.serialize(header);
+        String stringClaims = JsonUtils.serialize(claims);
+        String claimsEncoded = Base64.getUrlEncoder().encodeToString(stringClaims.getBytes());
+        String headerEncoded = Base64.getUrlEncoder().encodeToString(stringHeader.getBytes());
+        String unsignedToken = headerEncoded + "." + claimsEncoded;
+        Signature signature;
+        KeyPairGenerator keyGen;
+        try {
+            signature = Signature.getInstance("SHA256withRSA");
+            keyGen = KeyPairGenerator.getInstance("RSA");
+            keyGen.initialize(2048);
+        } catch (java.security.NoSuchAlgorithmException e) {
+            return null;
+        }
+
+        KeyPair pair = keyGen.generateKeyPair();
+        PrivateKey privateKey = pair.getPrivate();
+        byte[] signed;
+        try {
+            signature.initSign(privateKey);
+            signature.update(unsignedToken.getBytes());
+            signed = signature.sign();
+        } catch (Exception e) {
+            return null;
+        }
+        String signatureEncoded = Base64.getUrlEncoder().encodeToString(signed);
+        return unsignedToken + "." + signatureEncoded;
+    }
 }
