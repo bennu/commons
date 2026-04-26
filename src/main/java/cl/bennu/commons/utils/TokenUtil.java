@@ -1,7 +1,6 @@
 package cl.bennu.commons.utils;
 
 
-import io.jsonwebtoken.Jwts;
 import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.ObjectMapper;
 import tools.jackson.databind.json.JsonMapper;
