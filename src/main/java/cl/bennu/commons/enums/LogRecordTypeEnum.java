@@ -10,18 +10,19 @@ import java.util.Map;
 
 @Getter
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
-public enum QueueEnum implements BaseEnum {
+public enum LogRecordTypeEnum implements BaseEnum {
 
     //@formatter:off
-    PENDING (1, "Pendiente")
-    , EXECUTION (2, "Ejecución")
-    , ERROR (3, "Error")
-    , FINALIZED (4, "Finalizado")
-    , CANCELED (5, "Cancelado")
+    INSERT (1, "Creación")
+    , UPDATE (2, "Actualización")
+    , DELETE (3, "Eliminación")
+    , BACKUP (4, "Respaldo")
+    , ACTIVE (5, "Activa")
+    , DISABLED (6, "Deshabilitada")
     ;
     //@formatter:on
 
-    QueueEnum(Integer id, String name) {
+    LogRecordTypeEnum(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -30,7 +31,7 @@ public enum QueueEnum implements BaseEnum {
     private final String name;
 
     @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-    public static QueueEnum valueOf(Object o) {
+    public static LogRecordTypeEnum valueOf(Object o) {
         if (o instanceof Integer id) {
             return Arrays.stream(values()).filter(e -> e.getId().equals(id)).findFirst().orElse(null);
         } else if (o instanceof Map map) {
