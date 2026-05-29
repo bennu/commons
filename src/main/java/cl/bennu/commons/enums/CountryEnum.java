@@ -5,9 +5,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 
-import java.util.Arrays;
-import java.util.Map;
-
 /**
  * Represents a country with its associated details.
  */
@@ -213,14 +210,20 @@ public enum CountryEnum implements BaseEnum {
     ;
     //@formatter:on
 
+    private final Integer id;
+    private final String code;
+    private final String name;
+    private final Integer independenceYear;
+    private final CurrencyEnum currencyEnum;
+
     /**
      * Constructor for CountryEnum.
      *
-     * @param id the unique identifier of the country
-     * @param code the ISO code of the country
-     * @param name the name of the country
+     * @param id               the unique identifier of the country
+     * @param code             the ISO code of the country
+     * @param name             the name of the country
      * @param independenceYear the year of independence
-     * @param currencyEnum the associated currency
+     * @param currencyEnum     the associated currency
      */
     CountryEnum(Integer id, String code, String name, Integer independenceYear, CurrencyEnum currencyEnum) {
         this.id = id;
@@ -230,22 +233,10 @@ public enum CountryEnum implements BaseEnum {
         this.currencyEnum = currencyEnum;
     }
 
-    private final Integer id;
-    private final String code;
-    private final String name;
-    private final Integer independenceYear;
-    private final CurrencyEnum currencyEnum;
-
     @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
     public static CountryEnum valueOf(Object o) {
-        if (o instanceof Integer id) {
-            return Arrays.stream(values()).filter(e -> e.getId().equals(id)).findFirst().orElse(null);
-        } else if (o instanceof Map map) {
-            Integer id = (Integer) map.get("id");
-            return Arrays.stream(values()).filter(e -> e.getId().equals(id)).findFirst().orElse(null);
-        } else {
-            return null;
-        }
+        Integer id = EnumIdResolver.extractId(o);
+        return EnumIdResolver.fromId(values(), id, CountryEnum::getId);
     }
 
 }
