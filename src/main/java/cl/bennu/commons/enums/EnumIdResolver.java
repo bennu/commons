@@ -2,7 +2,7 @@ package cl.bennu.commons.enums;
 
 import java.util.Arrays;
 import java.util.Map;
-import java.util.function.Function;
+import java.util.function.ToIntFunction;
 
 public final class EnumIdResolver {
 
@@ -22,12 +22,12 @@ public final class EnumIdResolver {
         return null;
     }
 
-    public static <E> E fromId(E[] values, Integer id, Function<E, Integer> idExtractor) {
+    public static <E> E fromId(E[] values, Integer id, ToIntFunction<E> idExtractor) {
         if (id == null) {
             return null;
         }
         return Arrays.stream(values)
-                .filter(value -> id.equals(idExtractor.apply(value)))
+                .filter(value -> idExtractor.applyAsInt(value) == id)
                 .findFirst()
                 .orElse(null);
     }
