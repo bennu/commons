@@ -1,6 +1,7 @@
 package cl.bennu.commons.enums;
 
 import cl.bennu.commons.enums.base.BaseEnum;
+import cl.bennu.commons.enums.base.EnumIdResolver;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
