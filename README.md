@@ -42,8 +42,8 @@ Dependencies
 ------------
 
 - lombok 1.18.46
-- jackson-core 3.1.3
-- jackson-databind 3.1.3
+- jackson-core 3.2.0
+- jackson-databind 3.2.0
 - commons-lang3 3.20.0
 - commons-io 2.22.0
 - commons-beanutils 1.11.0
