@@ -1,13 +1,11 @@
 package cl.bennu.commons.enums;
 
+import cl.bennu.commons.enums.base.EnumIdResolver;
 import cl.bennu.commons.number.*;
 import cl.bennu.commons.number.iface.SpecificNumberSystem;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
-
-import java.util.Arrays;
-import java.util.Map;
 
 @Getter
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)

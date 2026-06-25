@@ -1,4 +1,4 @@
-package cl.bennu.commons.enums;
+package cl.bennu.commons.enums.base;
 
 import java.util.Arrays;
 import java.util.Map;
