@@ -37,14 +37,8 @@ public enum NumberSystemTypeEnum implements cl.bennu.commons.enums.base.BaseEnum
 
     @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
     public static NumberSystemTypeEnum valueOf(Object o) {
-        if (o instanceof Integer id) {
-            return Arrays.stream(values()).filter(e -> e.getId().equals(id)).findFirst().orElse(null);
-        } else if (o instanceof Map map) {
-            Integer id = (Integer) map.get("id");
-            return Arrays.stream(values()).filter(e -> e.getId().equals(id)).findFirst().orElse(null);
-        } else {
-            return null;
-        }
+        Integer id = EnumIdResolver.extractId(o);
+        return EnumIdResolver.fromId(values(), id, NumberSystemTypeEnum::getId);
     }
 
 }
