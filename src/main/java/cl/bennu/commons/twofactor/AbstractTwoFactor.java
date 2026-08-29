@@ -20,9 +20,9 @@ public abstract class AbstractTwoFactor {
             throw new IllegalArgumentException("Length must be between 4 and 8.");
         }
 
-        String dateMinuteStr = null;
-        Integer multiplier = null;
-        Integer addend = null;
+        String dateMinuteStr;
+        int multiplier;
+        int addend;
         if (TwoFactorTypeEnum.MINUTELY.equals(twoFactorTypeEnum)) {
             dateMinuteStr = LocalDateTime.now(ZoneId.of("America/Santiago")).format(DateTimeFormatter.ofPattern("yyyyMMddHHmm"));
             multiplier = 97;
