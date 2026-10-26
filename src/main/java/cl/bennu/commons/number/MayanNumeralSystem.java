@@ -24,12 +24,12 @@ public class MayanNumeralSystem implements SpecificNumberSystem {
         while (number > 0) {
             int digit = (int) (number % 20);
             if (digit == 0) {
-                levels.add("0");
+                levels.add(0, "0");
             } else {
                 StringBuilder sb = new StringBuilder();
                 sb.append("-".repeat(digit / 5));
                 sb.append(".".repeat(digit % 5));
-                levels.add(sb.toString());
+                levels.add(0, sb.toString());
             }
             number /= 20;
         }

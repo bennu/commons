@@ -23,10 +23,14 @@ public class BabylonianNumeralSystem implements SpecificNumberSystem {
         List<String> parts = new ArrayList<>();
         while (number > 0) {
             long digit = number % 60;
-            StringBuilder symbol = new StringBuilder();
-            symbol.append("^".repeat((int) (digit / 10)));
-            symbol.append("|".repeat((int) (digit % 10)));
-            parts.add(0, symbol.toString());
+            if (digit == 0) {
+                parts.add(0, "0");
+            } else {
+                StringBuilder symbol = new StringBuilder();
+                symbol.append("^".repeat((int) (digit / 10)));
+                symbol.append("|".repeat((int) (digit % 10)));
+                parts.add(0, symbol.toString());
+            }
             number /= 60;
         }
         return String.join(" ", parts);

@@ -10,7 +10,7 @@ public class AtticNumeralSystem implements SpecificNumberSystem {
     private static final LinkedHashMap<String, Long> SYMBOLS = new LinkedHashMap<>();
 
     static {
-        SYMBOLS.put("ΜΔ", 1_000_000L);
+        SYMBOLS.put("ΜΩ", 1_000_000L);
         SYMBOLS.put("ΜΥ", 100_000L);
         SYMBOLS.put("Μ", 10_000L);
         SYMBOLS.put("Χ", 1_000L);

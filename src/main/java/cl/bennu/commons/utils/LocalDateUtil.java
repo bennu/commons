@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 import java.util.Date;
 import java.util.regex.Pattern;
 
@@ -16,11 +17,12 @@ public class LocalDateUtil {
     public static LocalDateTime toLocalDateTime(String date, String pattern) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(pattern);
         if (date == null || date.isEmpty()) return null;
-        return LocalDate.parse(date, dateTimeFormatter).atStartOfDay();
+        TemporalAccessor parsed = dateTimeFormatter.parseBest(date, LocalDateTime::from, LocalDate::from);
+        return parsed instanceof LocalDateTime localDateTime ? localDateTime : ((LocalDate) parsed).atStartOfDay();
     }
 
     public static LocalDateTime toLocalDateTime(Date date) {
-        return LocalDateTime.from(date.toInstant());
+        return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
     }
 
     public static boolean isValidDateFormat(String date) {

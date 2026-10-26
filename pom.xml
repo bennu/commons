@@ -7,7 +7,7 @@
 
     <groupId>cl.bennu</groupId>
     <artifactId>commons</artifactId>
-    <version>1.9.0</version>
+    <version>1.10.0</version>
     <name>bennu-commons</name>
     <description>Utilitarios bennu</description>
     <url>https://github.com/bennu/commons</url>
@@ -231,6 +231,36 @@
                         <goals>
                             <goal>jar-no-fork</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.15</version>
+                <executions>
+                    <execution>
+                        <id>default-prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                        <configuration>
+                            <exclClassLoaders>*QuarkusClassLoader</exclClassLoaders>
+                            <destFile>${project.build.directory}/jacoco-quarkus.exec</destFile>
+                            <append>true</append>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <dataFile>${project.build.directory}/jacoco-quarkus.exec</dataFile>
+                            <outputDirectory>${project.build.directory}/jacoco-report</outputDirectory>
+                            <title>commons</title>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
