@@ -21,6 +21,18 @@ public class LogUtil {
         }
     }
 
+    static String toString(Object o) {
+        // reflectionToString no puede acceder a los campos de clases del JDK (Java 17+)
+        if (o == null || o.getClass().getName().startsWith("java.")) {
+            return String.valueOf(o);
+        }
+        try {
+            return ToStringBuilder.reflectionToString(o);
+        } catch (RuntimeException e) {
+            return String.valueOf(o);
+        }
+    }
+
     public static void insert(String user, String entity, Object o) {
         if (StringUtils.isBlank(user)) {
             user = "anonymous";
@@ -30,7 +42,7 @@ public class LogUtil {
                 + " insert by "
                 + user
                 + ", data = "
-                + ToStringBuilder.reflectionToString(o);
+                + toString(o);
 
         LOGGER.info(callerClassName() + log);
     }
@@ -44,9 +56,9 @@ public class LogUtil {
                 + " update by "
                 + user
                 + ", old data = "
-                + ToStringBuilder.reflectionToString(oldO)
+                + toString(oldO)
                 + ", new data = "
-                + ToStringBuilder.reflectionToString(newO);
+                + toString(newO);
 
         LOGGER.info(callerClassName() + log);
     }
@@ -60,7 +72,7 @@ public class LogUtil {
                 + " delete by "
                 + user
                 + ", data = "
-                + ToStringBuilder.reflectionToString(o);
+                + toString(o);
 
         LOGGER.info(callerClassName() + log);
     }
@@ -72,11 +84,7 @@ public class LogUtil {
     public static void log(String log, Object... objects) {
         StringBuilder stringBuilder = new StringBuilder(log);
         for (Object o : objects) {
-            if (o instanceof String || o instanceof Number || o instanceof Boolean) {
-                stringBuilder.append("    -> ").append(o);
-            } else {
-                stringBuilder.append("    -> ").append(ToStringBuilder.reflectionToString(o));
-            }
+            stringBuilder.append("    -> ").append(toString(o));
         }
 
         LOGGER.info(callerClassName() + stringBuilder);
