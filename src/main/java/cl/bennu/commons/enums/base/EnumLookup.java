@@ -6,6 +6,7 @@ import java.util.function.Function;
 
 public final class EnumLookup {
     private EnumLookup() {
+        // Prevent instantiation.
     }
 
     public static <E extends Enum<E>, K> E find(E[] values, K key, Function<E, K> keyExtractor) {
