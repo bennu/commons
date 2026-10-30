@@ -19,13 +19,15 @@ class RUTValidatorTest {
 
     @Test
     void testValidateWithString() {
-        assertTrue(RUTValidator.validate("164317064"));
-        assertTrue(RUTValidator.validate("760929638"));
+        assertTrue(RUTValidator.validate("16431706", "4"));
+        assertTrue(RUTValidator.validate("76092963", "8"));
 
-        assertFalse(RUTValidator.validate("12345678X"));
-        assertFalse(RUTValidator.validate("1234"));
-        assertFalse(RUTValidator.validate(""));
-        assertFalse(RUTValidator.validate(null));
+        assertFalse(RUTValidator.validate("12345678", "X"));
+        assertFalse(RUTValidator.validate("123", "4"));
+        assertFalse(RUTValidator.validate("", ""));
+        assertFalse(RUTValidator.validate(null, ""));
+        assertFalse(RUTValidator.validate("", null));
+        assertFalse(RUTValidator.validate(null, null));
     }
 
     @Test
@@ -43,33 +45,6 @@ class RUTValidatorTest {
         assertFalse(RUTValidator.validateWithFormat("12.345.678-X"));
         assertFalse(RUTValidator.validateWithFormat(""));
         assertFalse(RUTValidator.validateWithFormat(null));
-    }
-
-    @Test
-    void testValidateVerificationDigit() {
-        assertTrue(RUTValidator.validateVerificationDigit("K"));
-        assertTrue(RUTValidator.validateVerificationDigit("0"));
-
-        assertFalse(RUTValidator.validateVerificationDigit("X"));
-        assertFalse(RUTValidator.validateVerificationDigit(""));
-        assertFalse(RUTValidator.validateVerificationDigit(null));
-    }
-
-    @Test
-    void testSplit() {
-        String[] result = RUTValidator.split("16431706-4");
-        assertEquals("16431706", result[0]);
-        assertEquals("4", result[1]);
-
-        result = RUTValidator.split("76.092.963-8");
-        assertEquals("76092963", result[0]);
-        assertEquals("8", result[1]);
-    }
-
-    @Test
-    void testCalculateVerificationDigit() {
-        assertEquals("4", RUTValidator.calculateVerificationDigit("16431706"));
-        assertEquals("8", RUTValidator.calculateVerificationDigit("76092963"));
     }
 
 }

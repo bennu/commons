@@ -7,13 +7,20 @@ import java.util.regex.Pattern;
 public class RUTValidator {
 
     public static boolean validate(long rut, String verificationDigit) {
-        if (StringUtils.isBlank(verificationDigit) || rut == 0) return false;
+        if (!validateVerificationDigit(verificationDigit) || rut == 0) return false;
 
         String rutStr = String.valueOf(rut);
         return verificationDigit.equalsIgnoreCase(calculateVerificationDigit(rutStr));
     }
 
-    public static boolean validate(String rut) {
+    public static boolean validate(String rut, String verificationDigit) {
+        if (!validateVerificationDigit(verificationDigit) || !validate(rut)) return false;
+
+        String rutStr = String.valueOf(rut);
+        return verificationDigit.equalsIgnoreCase(calculateVerificationDigit(rutStr));
+    }
+
+    private static boolean validate(String rut) {
         if (StringUtils.isBlank(rut)) return false;
 
         String regex = "^[0-9]{7,8}[0-9Kk]$";
@@ -28,13 +35,13 @@ public class RUTValidator {
     }
 
 
-    public static boolean validateVerificationDigit(String verificationDigit) {
+    private static boolean validateVerificationDigit(String verificationDigit) {
         if (StringUtils.isBlank(verificationDigit)) return false;
 
         return verificationDigit.matches("[0-9Kk]");
     }
 
-    public static String[] split(String rut) {
+    private static String[] split(String rut) {
         if (rut == null || rut.length() < 2) {
             return new String[]{StringUtils.EMPTY, StringUtils.EMPTY};
         }
@@ -47,7 +54,7 @@ public class RUTValidator {
         return new String[]{rutNumber, verificationDigit};
     }
 
-    public static String calculateVerificationDigit(String rut) {
+    private static String calculateVerificationDigit(String rut) {
         int sum = 0;
         int multiplier = 2;
 
